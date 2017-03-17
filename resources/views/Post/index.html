@@ -1,0 +1,79 @@
+{% extends "layouts/app.html" %}
+{% block content %}
+<!-- Page Header -->
+<header class="intro-header" style="background-image: url('public/img/home-bg.jpg')">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <div class="site-heading">
+                    <h1>What’s Happening?</h1>
+                    <hr class="small">
+                    <span class="subheading text-capitalize">Let's share wonderful things.</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+<!-- Main Content -->
+<div class="container">
+    <div class="row">
+        <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+            
+            {% for post in posts %}
+            <div class="post-preview">
+                <a href="/post/{{post.key().id()}}">
+                    <h2 class="post-title">
+                        {{post.subject}}
+                    </h2>
+                    <h3 class="post-subtitle">
+                        {{post.content | safe}}
+                    </h3>
+                </a>
+                <p class="post-meta">
+                    Posted by 
+                    <strong class="text-capitalize">{{post.user.username}}</strong>
+                    on
+                    {% if post.last_modified %}
+                    {{post.last_modified.strftime("%d %B, %Y")}}
+                    - 
+                    {{post.last_modified.strftime("%H:%M")}}
+                    {% else %}
+                    {{post.created.strftime("%d %B, %Y")}}
+                    - 
+                    {{post.created.strftime("%H:%M")}} 
+                    {% endif %} 
+                </p>
+                {% if user and user.likes.filter("post = ", post).get() %}
+                <form method="POST" action="/post/{{post.key().id()}}/downvote">
+                    <button style="border:1px solid white; background-color: transparent;">
+                        <div class="list-inline text-left">
+                            <i class="fa fa-thumbs-down fa-wrench faa-wrench animated-hover" aria-hidden="true"></i>
+                            <span>Likes | {{post.likes.count()}} </span>
+                        </div>
+                    </button>
+                </form>
+                {% else %}
+                <form method="POST" action="/post/{{post.key().id()}}/upvote">
+                    <button style="border:1px solid white; background-color: transparent;">
+                        <div class="list-inline text-left">
+                            <i class="fa fa-thumbs-up fa-wrench faa-wrench animated-hover" aria-hidden="true"></i>
+                            <span>Likes | {{post.likes.count()}} </span>
+                        </div>
+                    </button>
+                </form>
+                {% endif %}
+            </div>
+            <hr>
+            {% endfor %}
+            
+            <!-- Pager -->
+            <ul class="pager">
+                <li class="next">
+                    <a id="back-to-top">Back to top</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
+<hr>
+{% endblock %}

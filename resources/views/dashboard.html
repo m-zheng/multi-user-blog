@@ -1,0 +1,49 @@
+{% extends "layouts/app.html" %}
+{% block content %}
+<div class="container">
+    <div class="row">
+        <div class="col-md-10 col-md-offset-1">
+            <div class="panel panel-default">
+                <div class="panel-heading">Welcome</div>
+                <div class="panel-body">
+                    Welcome {{ user.username }}. Your Application's Landing Page.
+                    <hr>
+                    {% if permission_error %}
+                    <div class="alert alert-danger">
+                        <strong>{{permission_error}}</strong>
+                    </div>
+                    {% endif %}
+                    <div class="pull-left">
+                        <h5>Post Dashboard</h5>
+                    </div>
+                    <div class="pull-right">
+                        <a class="btn btn-success" href="/post/create">Create A New Post</a>
+                    </div>
+                    <table class="table table-bordered table-responsive" id="dashboard-table">
+                        <tr>
+                            <th>ID</th>
+                            <th>Subject</th>
+                            <th>Poster</th>
+                            <th>Post Time</th>
+                            <th width="280px">Action</th>
+                        </tr>
+                        {% for post in user.posts %}
+                        <tr>
+                            <td>{{ post.key().id() }}</td>
+                            <td>{{ post.subject }}</td>
+                            <td>{{ post.user.username }}</td>
+                            <td>{{ post.created.strftime("%H:%M:%S %d/%m/%Y") }}</td>
+                            <td>
+                                <a class="btn btn-info" href="/post/{{post.key().id()}}">Show</a>
+                                <a class="btn btn-primary" href="/post/{{post.key().id()}}/edit">Edit</a>
+                                <a class="btn btn-danger" href="/post/{{post.key().id()}}/delete" onclick="return confirm('are you sure?')">Delete</a>
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,48 @@
+<!-- Modal {{comment.key().id()}}-->
+<div class="modal fade" id="myModal-{{comment.key().id()}}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel-{{comment.key().id()}}">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="myModalLabel-{{comment.key().id()}}">Comment Dashboard</h4>
+            </div>
+            {% if user.username == comment.user.username %}
+            <div class="modal-body">
+                <ul class="nav nav-pills">
+                    <li class="active"><a data-toggle="pill" href="#edit-comment-{{comment.key().id()}}">Edit</a></li>
+                    <li><a data-toggle="pill" href="#delete-comment-{{comment.key().id()}}">Delete</a></li>
+                </ul>
+                <div class="tab-content">
+                    <div id="edit-comment-{{comment.key().id()}}" class="tab-pane fade in active">
+                        <form method="POST" action="/comment/{{comment.key().id()}}/edit">
+                            <div class="form-group">
+                                <br>
+                                <label>Content:</label>
+                                <textarea class="form-control" name = "comment_content" style = "height: 250px; resize: vertical;">{{comment.content}}</textarea>
+                            </div>
+                            <button type="submit" class="btn btn-primary">Submit</button>
+                        </form>
+                    </div>
+                    <div id="delete-comment-{{comment.key().id()}}" class="tab-pane fade">
+                        <form method="POST" action="/comment/{{comment.key().id()}}/delete">
+                            <div class="form-group">
+                                <br>
+                                <p><strong>Warning!!!</strong> This action will delete the comment.</p>
+                            </div>
+                            <button type="submit" class="btn btn-primary" onclick="return confirm('are you sure?')">Delete</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            {% else %}
+            <div class="modal-body">
+                <div class="alert alert-danger">
+                    <p><strong>Sorry!</strong> You have no permission to do this.</p>
+                </div>
+            </div>
+            {% endif %}
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>

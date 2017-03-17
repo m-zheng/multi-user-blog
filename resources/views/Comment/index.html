@@ -1,0 +1,22 @@
+{% for comment in post.comments %}
+<!-- Comment -->
+<div class="media" data-toggle="modal" data-target="#myModal-{{comment.key().id()}}">
+    <div class="media-body">
+        <h4 class="media-heading">{{comment.user.username}}
+            <small>
+            {% if comment.last_modified %}
+            {{comment.last_modified.strftime("%d %B, %Y")}}
+            - 
+            {{comment.last_modified.strftime("%H:%M")}}
+            {% else %}
+            {{comment.created.strftime("%d %B, %Y")}}
+            - 
+            {{comment.created.strftime("%H:%M")}}                    
+            {% endif %}
+            </small>
+        </h4>
+        <p>{{comment.content}}</p>
+    </div>
+</div>
+{% include "Comment/edit.html" %}
+{% endfor %}

@@ -1,0 +1,58 @@
+{% extends "layouts/app.html" %}
+{% block content %}
+<!-- Page Content -->
+<div class="container">
+    <div class="row">
+        <!-- Post Content Column -->
+        <div class="col-lg-8">
+            <!-- Post Subject -->
+            <h1>{{post.subject}}</h1>
+            <!-- Author -->
+            <p class="lead">
+                Posted by {{post.user.username}}
+            </p>
+            {% if user and user.likes.filter("post = ", post).get() %}
+            <form method="POST" action="/post/{{post.key().id()}}/downvote">
+                <button style="border:1px solid white; background-color: transparent;">
+                    <div class="list-inline text-left">
+                        <i class="fa fa-thumbs-down fa-wrench faa-wrench animated-hover" aria-hidden="true"></i>
+                        <span>Likes | {{post.likes.count()}} </span>
+                    </div>
+                </button>
+            </form>
+            {% else %}
+            <form method="POST" action="/post/{{post.key().id()}}/upvote">
+                <button style="border:1px solid white; background-color: transparent;">
+                    <div class="list-inline text-left">
+                        <i class="fa fa-thumbs-up fa-wrench faa-wrench animated-hover" aria-hidden="true"></i>
+                        <span>Likes | {{post.likes.count()}} </span>
+                    </div>
+                </button>
+            </form>
+            {% endif %}
+            <hr>
+            <!-- Date/Time -->
+            <p>
+                <span class="glyphicon glyphicon-time"></span>
+                Posted on
+                {{post.last_modified.strftime("%d %B, %Y")}}
+                - 
+                {{post.last_modified.strftime("%H:%M")}}
+            </p>
+            <hr>
+            <!-- Post Content -->
+            <p class="lead">{{post.content | safe}}</p>
+            <hr>
+            {% include "Comment/create.html" %}
+            {% include "Comment/index.html" %}
+        </div>
+        <div class="col-lg-4">
+            <div class="pull-right">
+                <a class="btn btn-primary" href="{% if user %}/dashboard{% else %}/post{% endif %}">
+                Back
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

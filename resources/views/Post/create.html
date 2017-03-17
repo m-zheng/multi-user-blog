@@ -1,0 +1,44 @@
+{% extends "layouts/app.html" %}
+{% block content %}
+<div class="container">
+    <div class="row">
+        <div class="col-lg-12 margin-tb">
+            <div class="pull-left">
+                <h2> Start a new post</h2>
+            </div>
+            <div class="pull-right">
+                <a class="btn btn-primary" href="{% if user %}/dashboard{% else %}/post{% endif %}">
+                Back
+                </a>
+            </div>
+        </div>
+    </div>
+    
+    {% if error %}
+    <div class="row">
+        <div class ="col-lg-12">
+            <div class="alert alert-danger">
+                <strong>Danger!</strong> {{error }}
+            </div>
+        </div>
+    </div>
+    {% endif %}
+    
+    <div class="row">
+        <div class="col-lg-12">
+            <form method = "POST">
+                <div class="form-group">
+                    <label>Subject:</label>
+                    <input type="text" class="form-control" name="subject" value="{{ subject }}">
+                </div>
+                
+                <div class="form-group">
+                    <label>Content:</label>
+                    <textarea class="form-control" name="content" style = "height: 500px">{{content}}</textarea>
+                </div>
+                <button type="submit" class="btn btn-primary">Submit</button>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,72 @@
+{% extends "layouts/app.html" %}
+{% block content %}
+<div class="container">
+    <div class="row">
+        <div class="col-md-8 col-md-offset-2">
+            <div class="panel panel-default">
+                <div class="panel-heading">Register</div>
+                <div class="panel-body">
+                    <form class="form-horizontal" role="form" method="POST" action="">
+                        <div class="form-group {% if username_error or existing_user_error %}has-error{% endif %}">
+                            <label class="col-md-4 control-label">Username</label>
+                            <div class="col-md-6">
+                                <input type="text" class="form-control" name="username" value="{{ input_username }}">
+                                {% if username_error or existing_user_error %}
+                                <span class="help-block">
+                                <strong>{{username_error}}</strong>
+                                <strong>{{existing_user_error}}</strong>
+                                </span>                                
+                                {% endif %}
+                            </div>
+                        </div>
+                        
+                        <div class="form-group {% if password_format_error %}has-error{% endif %}">
+                            <label class="col-md-4 control-label">Password</label>
+                            <div class="col-md-6">
+                                <input type="password" class="form-control" name="password">
+                                {% if password_format_error %}
+                                <span class="help-block">
+                                <strong>{{password_format_error}}</strong>
+                                </span>                                
+                                {% endif %}
+                            </div>
+                        </div>
+                        
+                        <div class="form-group {% if password_consistency_error %}has-error{% endif %}">
+                            <label class="col-md-4 control-label">Confirm Password</label>
+                            <div class="col-md-6">
+                                <input type="password" class="form-control" name="password_confirmation">
+                                {% if password_consistency_error %}
+                                <span class="help-block">
+                                <strong>{{password_consistency_error}}</strong>
+                                </span>                                
+                                {% endif %}
+                            </div>
+                        </div>
+                        
+                        <div class="form-group {% if email_error %}has-error{% endif %}">
+                            <label class="col-md-4 control-label">E-Mail Address (Optional)</label>
+                            <div class="col-md-6">
+                                <input type="text" class="form-control" name="email" value="{{ input_email }}">
+                                {% if email_error %}
+                                <span class="help-block">
+                                <strong>{{email_error}}</strong>
+                                </span>                                
+                                {% endif %}
+                            </div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <div class="col-md-6 col-md-offset-4">
+                                <button type="submit" class="btn btn-primary">
+                                <i class="fa fa-btn fa-user"></i> Register
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

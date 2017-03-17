@@ -1,0 +1,18 @@
+<!-- Post Comments -->
+<!-- Comments Form -->
+<div class="well">
+    <h4>Leave a Comment:</h4>
+    {% if error %}
+    <div class="alert alert-danger">
+        <strong>Danger!</strong> {{error}}
+    </div>
+    {% endif %}
+    <form method="post">
+        <div class="form-group">
+            <textarea class="form-control" rows="3" style="resize: vertical;" name="comment"></textarea>
+        </div>
+        <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+</div>
+<hr>
+<!-- Posted Comments -->
