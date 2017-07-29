@@ -1,7 +1,9 @@
-# About
+# [Demo](https://udacity-nanodegree-p3.appspot.com/)
 
-This project is a part of Full Stack Developer Nanodegree from [Udacity](https://www.udacity.com/course/full-stack-web-developer-nanodegree--nd004).  
-It's a multi user blog where users can sign in and post blog posts as well as 'Like' and 'Comment' on other posts made on the blog. It has an authentication system for users to be able to register and sign in and then create blog posts!
+
+# About
+ 
+This is a multi user blog where users can sign in and post blog posts as well as 'Like' and 'Comment' on other posts made on the blog. It has an authentication system for users to be able to register and sign in and then create blog posts!
 
 
 ## Before you begin
@@ -37,10 +39,6 @@ To build and run the project locally:
     
   - Stop the development server by pressing Control+C.
  
-
-## Demo
-
-  - You can also visit the [Live Demo](https://udacity-nanodegree-p3.appspot.com/).
 
 ## Todos
 
